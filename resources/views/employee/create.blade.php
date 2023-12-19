@@ -58,22 +58,22 @@
     </div>
 @endif
    
-<form action="{{ $employee->id ? route('employees.update', $employee->id ) : route('employees.store') }}" method="POST">
-    @if ($employee->id) {{ method_field('PUT') }} @endif
-    <input type="hidden" name="_method" value="PUT">
+<form action="{{ isset($employee->id) ? route('employees.update', $employee->id ) : route('employees.store') }}" method="POST">
+    {{isset($employee->id) ? method_field('PUT') : '' }}
+
     {!! csrf_field() !!}
   
      <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
                 <strong>First Name:</strong>
-                <input type="text" name="first_name" class="form-control" placeholder="First Name" value={{ old('first_name', $employee->first_name) }}>
+                <input type="text" name="first_name" class="form-control" placeholder="First Name" value={{ old('first_name', isset($employee) ? $employee->first_name : '') }}>
             </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
                 <strong>Last Name:</strong>
-                <input type="text" name="last_name" class="form-control" placeholder="Last Name" value={{ old('last_name', $employee->last_name) }}>
+                <input type="text" name="last_name" class="form-control" placeholder="Last Name" value={{ old('last_name', isset($employee) ? $employee->last_name : '') }}>
             </div>
             <br/>
         </div>
@@ -81,26 +81,26 @@
         <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
                 <strong>Age:</strong>
-                <input type="text" name="age" class="form-control" placeholder="Age" value={{ old('age', $employee->age) }}>
+                <input type="text" name="age" class="form-control" placeholder="Age" value={{ old('age', isset($employee) ? $employee->age : '') }}>
             </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
                 <strong>Salary:</strong>
-                <input type="text" name="salary" class="form-control" placeholder="Salary" value={{ old('salary', $employee->salary) }}>
+                <input type="text" name="salary" class="form-control" placeholder="Salary" value={{ old('salary', isset($employee) ? $employee->salary : '') }}>
             </div>
             <br/>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
                 <strong>Schedule:</strong>
-                <input type="text" name="schedule" class="form-control" placeholder="Schedule" value={{ old('schedule', $employee->age) }}>
+                <input type="text" name="schedule" class="form-control" placeholder="Schedule" value={{ old('schedule', isset($employee->age)) }}>
             </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
                 <strong>Email:</strong>
-                <input type="email" name="email" class="form-control" placeholder="Email" value={{ old('email', $employee->email) }}>
+                <input type="email" name="email" class="form-control" placeholder="Email" value={{ old('email', isset($employee) ? $employee->email : '') }}>
             </div>
             <br/>
         </div>

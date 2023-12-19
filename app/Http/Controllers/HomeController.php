@@ -23,6 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        //dd(auth()->user()->name);
+        if (auth()->user()->role_id == 2) {
+            return redirect('services')->with('message', 'Hello!');
+        }
         $result = "from admin user";
         return view('home', ['result' => $result]);
     }

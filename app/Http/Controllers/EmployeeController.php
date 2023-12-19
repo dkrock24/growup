@@ -35,7 +35,7 @@ class EmployeeController extends Controller
 
     public function store(Request $request) {
         Employee::create($request->all());
-        return redirect('employees')->with('message', 'Record was created!');;
+        return redirect('employees')->with('message', 'Record was created!');
     }
 
     public function show($id) {
