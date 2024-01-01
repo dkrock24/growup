@@ -34,7 +34,10 @@ class EmployeeController extends Controller
     }
 
     public function store(Request $request) {
-        Employee::create($request->all());
+        $data =  $request->all();
+        isset($data['status']) ? $data['status'] = 1 : $data['status'] = 0;
+
+        Employee::create($data);
         return redirect('employees')->with('message', 'Record was created!');
     }
 
@@ -50,7 +53,11 @@ class EmployeeController extends Controller
 
     public function update(Request $request, $id) {
         $employee = Employee::find($id);
-        $employee->update($request->all());
+        $data =  $request->all();
+        isset($data['status']) ? $data['status'] = 1 : $data['status'] = 0;
+
+
+        $employee->update($data);
 
         return redirect('employees')->with('message','Employee has been updated!');
     }

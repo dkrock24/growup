@@ -12,8 +12,15 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
+
+    public function index()
+    {
+        $result = User::all()->sortByDesc("id");
+        return view('user/index', ['users' => $result]);
+    }
+
 
     /**
      * Display a listing of the resource.

@@ -17,5 +17,6 @@ class Employee extends Model
         'salary',
         'schedule',
         'email',
+        'status',
     ];
 }
