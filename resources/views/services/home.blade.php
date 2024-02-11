@@ -41,17 +41,17 @@
                 <div class="col-md-5">
                   <h5 class="card-header m-0 me-2 pb-3">Coming Job</h5>
                   <div id="totalRevenueChart" class="px-4">
-                    {{ date('M d, Y', strtotime($jobs[0]->deadline)) }}
+                    {{ count($jobs) > 0 ? date('M d, Y', strtotime($jobs[0]->deadline)) : 0 }}
                   </div>
                 </div>
                 <div class="col-md-7">
     
                   <div id="growthChart"></div>
                   <div class="text-left fw-medium pt-1 mb-4">
-                    &nbsp; Job Type: {{ $jobs[0]->serviceType->name}}
+                    &nbsp; Job Type: {{ @$jobs[0]->serviceType->name}}
                   </div>
                   <div class="text-left fw-medium pt-1 mb-3">
-                    &nbsp; Address: {{ $jobs[0]->address}}
+                    &nbsp; Address: {{ @$jobs[0]->address}}
                   </div>
     
                 </div>

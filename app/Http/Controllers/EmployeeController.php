@@ -25,7 +25,10 @@ class EmployeeController extends Controller
     public function index()
     {
         $result = Employee::all()->sortByDesc("id");
-        return view('employee/index', ['employees' => $result]);
+        return view('employee/index', [
+            'activeMenu' => 'Employees',
+            'employees' => $result
+        ]);
     }
 
     public function create()
@@ -43,12 +46,18 @@ class EmployeeController extends Controller
 
     public function show($id) {
         $employee = Employee::find($id);
-        return view('employee/update', ['employee'=> $employee]);
+        return view('employee/update', [
+            'activeMenu' => 'Employees',
+            'employee'=> $employee
+        ]);
     }
 
     public function edit($id) {
         $employee = Employee::find($id);
-        return view('employee/create', ['employee'=> $employee]);
+        return view('employee/create', [
+            'activeMenu' => 'Employees',
+            'employee'=> $employee
+        ]);
     }
 
     public function update(Request $request, $id) {

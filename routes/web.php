@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/user/register', [App\Http\Controllers\UserController::class, 'register']);
-Route::post('/user/create', [App\Http\Controllers\UserController::class, 'create'])->name('createUser');
+Route::get('/user/register', [App\Http\Controllers\CustomerRegisterController::class, 'register']);
+Route::post('/user/create', [App\Http\Controllers\CustomerRegisterController::class, 'create'])->name('createUser');
 
 Route::get('/', function () {
     return view('auth/login');

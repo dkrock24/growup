@@ -116,7 +116,7 @@ width: 100% !important;
                                                     <div class="demo-inline-spacing mt-3">
                                                       <div class="list-group list-group-flush">
                                                         <label class="list-group-item list-group-item-action">Job Date : {{ date('M d-Y', strtotime($content['job_date'])) }} &nbsp; {{ date('H:i A', strtotime($content['job_date'])) }} </label>
-                                                        <label class="list-group-item list-group-item-action">Service under : {{ $content['service_under']}}</label>
+                                                        <label class="list-group-item list-group-item-action">Contact Service: {{ $content['service_under']}}</label>
                                                         <label class="list-group-item list-group-item-action">Job Address : {{ $content['address']}}</label>
                                                         <label class="list-group-item list-group-item-action">Phone Number : {{ $content['phone']}}</label>
                                                         <label class="list-group-item list-group-item-action">Job Type : {{ $content['serviceType']}}</label>

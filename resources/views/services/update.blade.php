@@ -126,11 +126,12 @@
                         <label for="exampleFormControlTextarea1" class="form-label"><strong>Your Notes:</strong></label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="customer_notes">{{ $job[0]->customer_notes}}</textarea>
                     </div>
-
+                    <!--
                     <div class="form-check form-switch mb-0">
                         <label class="form-check-label" for="flexSwitchCheckChecked">Disclaimer :</label>
-                        The job will be done if the payment made.
+                         The job will be done if the payment made. 
                     </div>
+                    -->
                     <br/>
                 </div>
                 

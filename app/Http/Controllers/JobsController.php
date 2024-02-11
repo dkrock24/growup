@@ -26,17 +26,20 @@ class JobsController extends Controller
      */
     public function index(request $request)
     {
-        $jobs = Job::where(["status" => 0])->with(['user', 'serviceType'])->orderBy('deadline')->get();
-        $JobList = Job::with(['user', 'serviceType'])->orderBy('deadline')->get();
+        $jobs = Job::where(["status" => 0])->with(['user', 'serviceType'])->orderBy('deadline', 'DESC')->get();
+        $JobList = Job::with(['user', 'serviceType'])->orderBy('deadline', 'DESC')->get();
         $pending = $JobList->where('status', 0);
         $ongoing = $JobList->where('status', 1);
         $completed = $JobList->where('status', 2);
         $canceled = $JobList->where('status', 3);
 
         $showPerPage = 10;
-        $paginated = PaginationHelper::paginate($jobs, $showPerPage);
+        $page = 1;
+        $paginated = PaginationHelper::paginate($JobList, $showPerPage);
+        //dd($paginated->getTotal());
 
         return view('jobs/index', [
+            'activeMenu' => 'Jobs details',
             "jobs" => $paginated,
             "jobList" => $JobList,
             "pending" => $pending,
@@ -74,6 +77,7 @@ class JobsController extends Controller
         $jobStatus = Job::jobStatus();
        
         return view('jobs/show', [
+            'activeMenu' => 'Jobs details',
             "jobs" => 0,
             "job" => $detail,
             'payment_methods'=> $payment_methods,
@@ -100,6 +104,7 @@ class JobsController extends Controller
 
 
         return view('services/update', [
+            'activeMenu' => 'Jobs details',
             'job'=> $job,
             'services'=> $services,
             'customer'=> $customer,

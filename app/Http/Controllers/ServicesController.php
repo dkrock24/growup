@@ -113,7 +113,7 @@ class ServicesController extends Controller
     public function show(Request $request)
     {
 
-        $jobs = Job::where('customer', Auth::user()->id)->with(['user', 'serviceType'])->orderBy('deadline')->get();
+        $jobs = Job::where('customer', Auth::user()->id)->with(['user', 'serviceType'])->orderBy('deadline', 'DESC')->get();
         
         $showPerPage = 10;
         $page = 1;
@@ -121,9 +121,9 @@ class ServicesController extends Controller
         $paginated = PaginationHelper::paginate($jobs, $showPerPage);
         
         if ($request->page != $page) {
+           
             //dd($paginated);
         }
-
         
         
         

@@ -26,7 +26,10 @@ class CatalogController extends Controller
     public function index()
     {
         $result = Catalog::all()->sortByDesc("id");
-        return view('catalog/index', ['catalog' => $result]);
+        return view('catalog/index', [
+            'activeMenu' => 'Catalog',
+            'catalog' => $result
+        ]);
     }
 
     /**
@@ -64,7 +67,10 @@ class CatalogController extends Controller
     {
         $catalog = Catalog::find($catalog);
 
-        return view('catalog/create', ['catalog'=> $catalog]);
+        return view('catalog/create', [
+            'activeMenu' => 'Catalog',
+            'catalog'=> $catalog
+        ]);
     }
 
     /**

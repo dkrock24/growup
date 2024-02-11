@@ -26,7 +26,10 @@ class CustomerController extends Controller
     public function index()
     {
         $result = User::all()->where('role_id','2');
-        return view('customer/index', ['customers' => $result]);
+        return view('customer/index', [
+            'activeMenu' => 'Customers',
+            'customers' => $result
+        ]);
     }
 
     public function show($id) {
@@ -53,6 +56,7 @@ class CustomerController extends Controller
         $dataJobs['totalJobs'] = $dataJobs['activeJobs'] + $dataJobs['inactiveJobs'];
 
         return view('customer/create', [
+            'activeMenu' => 'Customers',
             'customers'=> 0,
             'customer'=> $customer,
             'totals' => $dataJobs
@@ -61,7 +65,10 @@ class CustomerController extends Controller
 
     public function edit($id) {
         $customer = User::find($id);
-        return view('customer/create', ['customer'=> $customer]);
+        return view('customer/create', [
+            'activeMenu' => 'Customers',
+            'customer'=> $customer
+        ]);
     }
 
     public function update(Request $request, $id) {

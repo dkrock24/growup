@@ -29,7 +29,7 @@
           </thead>
           <tbody class="table-border-bottom-0">
             @php
-                $i = 1;
+                $i = $jobs->currentPage() * 10 - 9;
             @endphp
             @foreach ($jobs as $job)
             <tr>
@@ -102,19 +102,19 @@
                 ></a>
               </li>
               <li class="page-item prev">
-                <a class="page-link" href="javascript:void(0);"
+                <a class="page-link" href="/services/list?page={{$jobs->currentPage()-1}}"
                   ><i class="tf-icon bx bx-chevron-left"></i
                 ></a>
               </li>
-              @for($i=1; $i <= $jobs->onEachSide; $i++)
               
-              <li class="page-item @if($jobs->currentPage() == $i ) active @endif">
-                <a class="page-link" href="/services/list?page={{$i}}">{{ $i}}</a>
+              
+              <li class="page-item active">
+                <a class="page-link" href="/services/list?page={{$i}}">{{ $jobs->currentPage() }}</a>
               </li>
             
-              @endfor
+              
               <li class="page-item next">
-                <a class="page-link" href="javascript:void(0);"
+                <a class="page-link" href="/services/list?page={{$jobs->currentPage()+1}}"
                   ><i class="tf-icon bx bx-chevron-right"></i
                 ></a>
               </li>

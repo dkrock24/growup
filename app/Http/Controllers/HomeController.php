@@ -47,7 +47,7 @@ class HomeController extends Controller
 
 
         return view('home', [
-            'home' => '',
+            'activeMenu' => 'Home',
             'jobs' => $coming10jobs,
             "jobList" => $JobList,
             "pending" => $pending,
