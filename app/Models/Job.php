@@ -32,6 +32,7 @@ class Job extends Model
         'payment_file',
         'customer',
         'p_method',
+        'recurrent',
     ];
 
     public static function jobStatus() {

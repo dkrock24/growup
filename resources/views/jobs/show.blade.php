@@ -199,7 +199,22 @@
                                 aria-describedby="basic-icon-default-email2" />
                             </div>                          
                             </div>
-                        </div>                  
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="basic-icon-default-email">Recurrent</label>
+                            <div class="col-sm-10">
+                                <div class="form-check form-switch mb-2">
+                                    <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+
+                                    @if ($job->recurrent)
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="recurrent" {{ old('recurrent', $job->recurrent ? 'checked' : '') }} />
+                                    @else
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="recurrent" {{ old('recurrent', !isset($job) ? 'checked' : '') }} />
+                                    @endif
+                                </div>
+                                <br/>                         
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -281,9 +296,58 @@
                 </div>
             </div>
           </div>
-        </div>
 
-       
+          <div class="card mb-4">
+            <div class="card-header d-flex align-items-center justify-content-between">
+              <h5 class="mb-0">Employee Assigned</h5>
+              <small class="text-muted float-end"> - </small>
+            </div>
+            <div class="card-body">
+              
+                <div class="row mb-3">
+                    <form action="add_service_employee" method="POST" style="background:none;">
+                        <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Employees</label>
+                        <div class="col-sm-10">
+                            <div class="input-group input-group-merge" style="width:100%;">
+                                <span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-user"></i></span>
+                                <input type="hidden" value="{{$job->id}}" name=job />
+                                <select id="defaultSelect" class="select-input" name="employee">
+                                
+                                    @foreach ($employees as $employee)
+                                        <option value="{{$employee->id}}">{{$employee->first_name}} {{ $employee->last_name }}</option>
+                                    @endforeach
+
+                                </select>
+                                <input class="form-button" type="submit" value="Add" style="float:right;" />
+                                @csrf
+ 
+                            </div>
+                        </div>
+                    </form>
+                </div>  
+                <table class="table table-responsive text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th colspan="">First Name</th>
+                            <th colspan="">Last Name</th>
+                            <th colspan="">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        @foreach ($jobEmployees as $key => $job)
+                            <tr>
+                                <td>{{ ++$key }}</td>
+                                <td>{{ $job->employee->first_name }}</td>
+                                <td>{{ $job->employee->last_name }}</td>
+                                <td><a href={{'remove_service_employee/'.$job->id }} >Delete</a></td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>           
+            </div>
+          </div>
+        </div>       
       </div>
 </div>
 @endsection

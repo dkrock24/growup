@@ -23,6 +23,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::post('jobs/add_service_employee', [App\Http\Controllers\JobsController::class, 'add_service_employee']);
+Route::get('jobs/remove_service_employee/{id}', [App\Http\Controllers\JobsController::class, 'remove_service_employee']);
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('employees', App\Http\Controllers\EmployeeController::class);
 Route::resource('catalog', App\Http\Controllers\CatalogController::class);

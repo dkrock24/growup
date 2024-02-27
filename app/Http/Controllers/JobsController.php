@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Helpers\PaginationHelper;
 use App\Models\Catalog;
+use App\Models\Employee;
+use App\Models\JobEmployee;
 use App\Models\User;
 use App\Models\Job;
 use App\Models\PaymentMethod;
@@ -71,19 +73,61 @@ class JobsController extends Controller
     public function show($id)
     {
 
-        $detail = Job::find($id)->with(['user', 'serviceType', 'paymentType'])->first();
+        $detail = Job::findOrFail($id);
+        $detail = $detail->load(['user', 'serviceType', 'paymentType']);
+
         $payment_methods = PaymentMethod::Where("status",1)->get();
         $service_type = Catalog::Where("status",1)->get();
         $jobStatus = Job::jobStatus();
-       
+        $employees = Employee::All();
+        $employees_assigned = JobEmployee::where(["job" => $id])->get();
+        $res = $employees_assigned->load(['employee']);
+
         return view('jobs/show', [
             'activeMenu' => 'Jobs details',
             "jobs" => 0,
             "job" => $detail,
             'payment_methods'=> $payment_methods,
             'service_type'=> $service_type,
-            'jobStatus'=> $jobStatus
+            'employees'=> $employees,
+            'jobStatus'=> $jobStatus,
+            'jobEmployees' => $res
         ]);
+    }
+
+    public function add_service_employee(request $request) {
+        
+        $flag = false;
+        $job = $request->job;
+        $employee = $request->employee;
+
+        $result = JobEmployee::where(["job" => $job, "emp"=> $employee])->get();
+
+        if (count($result) == 0) {
+
+            JobEmployee::create(["job" => $job, "emp" => $employee]);
+            $flag = true;
+        }
+
+        return redirect('jobs/'. $job)->with('message', $flag ? 'Records was added Successfully': 'Record already exist!');
+    }
+
+    public function remove_service_employee(JobEmployee $request, $id) {
+        
+        $response = JobEmployee::where(["id" => $id])->first();
+        
+        $jobId = $response->job;
+
+        
+        if ($response) {
+
+            $response->delete();
+
+            return redirect('jobs/'. $jobId)->with('message', 'Records was deleted Successfully');
+        } else {
+            return redirect('jobs/'. $jobId)->with('message', 'Record already exist!');
+        }        
+    
     }
 
     /**
@@ -102,7 +146,7 @@ class JobsController extends Controller
         $datetime->add(new DateInterval("P1D"));
         $deadline = $datetime->format('Y-m-d 08:00:00');
 
-
+        
         return view('services/update', [
             'activeMenu' => 'Jobs details',
             'job'=> $job,

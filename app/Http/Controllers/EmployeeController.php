@@ -33,7 +33,9 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        return view('employee/create');
+        return view('employee/create', [
+            'activeMenu' => 'Employees'
+        ]);
     }
 
     public function store(Request $request) {
