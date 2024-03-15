@@ -9,21 +9,21 @@
       <div class="badge bg-danger rounded-pill ms-auto"></div>
     </a>
     <ul class="menu-sub">
-      <li class="menu-item {{ isset($home) ? ' active': ''}}">
+      <li class="menu-item {{ isset($serviceHome) ? ' active': ''}}">
         <a
           href="/home"
           class="menu-link">
           <div data-i18n="CRM">Home</div>
         </a>
       </li>
-      <li class="menu-item {{ isset($employees) ? ' active': ''}}">
+      <li class="menu-item {{ isset($servicesList) ? ' active': ''}}">
         <a
           href="/services/create"
           class="menu-link">
           <div data-i18n="CRM">Services</div>
         </a>
       </li>
-      <li class="menu-item {{ isset($catalog) ? ' active': ''}}">
+      <li class="menu-item {{ isset($servicesJobs) ? ' active': ''}}">
         <a href="/services/list" class="menu-link">
           <div data-i18n="Analytics">Jobs</div>
         </a>

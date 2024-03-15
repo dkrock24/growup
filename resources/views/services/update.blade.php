@@ -143,9 +143,12 @@
                     
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 text-left">
+                    
                     <div class="pull-right">
                         <a class="btn btn-success" href="/services/list"> Back</a>
+                        @if ($job[0]->status != 2)
                         <button type="submit" class="btn btn-primary">Submit</button>
+                        @endif
                     </div>
                 </div>
             </div>

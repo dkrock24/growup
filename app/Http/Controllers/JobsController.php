@@ -117,7 +117,6 @@ class JobsController extends Controller
         $response = JobEmployee::where(["id" => $id])->first();
         
         $jobId = $response->job;
-
         
         if ($response) {
 
@@ -126,7 +125,7 @@ class JobsController extends Controller
             return redirect('jobs/'. $jobId)->with('message', 'Records was deleted Successfully');
         } else {
             return redirect('jobs/'. $jobId)->with('message', 'Record already exist!');
-        }        
+        }
     
     }
 
@@ -165,6 +164,10 @@ class JobsController extends Controller
         $job = Job::find($id);
 
         $data =  $request->all();
+
+        if (isset($data['recurrent'])) {
+            $data['recurrent'] = 1;
+        }
 
         
         $job->update($data);

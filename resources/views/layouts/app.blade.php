@@ -139,13 +139,12 @@
                   <li class="nav-item lh-1 me-3">
                     <a
                       class="github-button"
-                      href="https://github.com/themeselection/sneat-html-admin-template-free"
+                      href="#"
                       data-icon="octicon-star"
                       data-size="large"
                       data-show-count="true"
                       aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
-                      >Star</a
-                    >
+                      >{{ isset(Auth::user()->name) ? Auth::user()->name : '' }}</a>
                   </li>
   
                   <!-- User -->
@@ -165,8 +164,8 @@
                               </div>
                             </div>
                             <div class="flex-grow-1">
-                              <span class="fw-medium d-block">{{ isset(Auth::user()->name) ?? Auth::user()->name }}</span>
-                              <small class="text-muted">Admin</small>
+                              <span class="fw-medium d-block">{{ isset(Auth::user()->name) ? Auth::user()->name : '' }}</span>
+                              <small class="text-muted">{{ Auth::user()->role_id == 1 ? 'Admin' : 'Customer' }}</small>
                             </div>
                           </div>
                         </a>
@@ -174,18 +173,20 @@
                       <li>
                         <div class="dropdown-divider"></div>
                       </li>
-                      <li>
+                      <!--<li>
                         <a class="dropdown-item" href="#">
                           <i class="bx bx-user me-2"></i>
                           <span class="align-middle">My Profile</span>
                         </a>
-                      </li>
+                      </li> 
+                      -->
                       <li>
                         <a class="dropdown-item" href="#">
                           <i class="bx bx-cog me-2"></i>
                           <span class="align-middle">Settings</span>
                         </a>
                       </li>
+                      <!--
                       <li>
                         <a class="dropdown-item" href="#">
                           <span class="d-flex align-items-center align-middle">
@@ -194,7 +195,7 @@
                             <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
                           </span>
                         </a>
-                      </li>
+                      </li>-->
                       <li>
                         <div class="dropdown-divider"></div>
                       </li>

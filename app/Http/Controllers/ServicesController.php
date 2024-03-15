@@ -35,6 +35,7 @@ class ServicesController extends Controller
         $canceled = $JobList->where('status', 3);
 
         return view('services/home', [
+            "serviceHome" => [],
             "customer" => $customer,
             "jobs" => $jobs,
             "jobList" => $JobList,
@@ -74,6 +75,7 @@ class ServicesController extends Controller
         $deadline = $datetime->format('Y-m-d 08:00:00');
 
         return view('services/create', [
+            'servicesList'=> [],
             'services'=> $services,
             'customer'=> $customer,
             'deadline'=> $deadline,
@@ -134,7 +136,10 @@ class ServicesController extends Controller
             var_dump($job->serviceType);
         }
         dd(1);*/
-        return view('services/list', ["jobs" => $paginated]);
+        return view('services/list', [
+            "servicesJobs" => [],
+            "jobs" => $paginated
+        ]);
     }
 
     /**
@@ -142,7 +147,7 @@ class ServicesController extends Controller
      */
     public function edit($id)
     {
-        $job = Job::find($id)->with(['user', 'serviceType', 'paymentType'])->get();
+        $job = Job::where(["id" => $id])->with(['user', 'serviceType', 'paymentType'])->get();
 
         $services = Catalog::all()->where("status", 1);
         $customer = User::where("id", Auth::user()->id)->first();

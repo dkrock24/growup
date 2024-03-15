@@ -14,13 +14,15 @@ class SampleMail extends Mailable
     use Queueable, SerializesModels;
 
     public array $content;
+    public string $type;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(array $content)
+    public function __construct(array $content, string $type)
     {
         $this->content = $content;
+        $this->type = $type;
     }
 
     /**
@@ -39,7 +41,7 @@ class SampleMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mails.mail'
+            view: $this->type
         );
     }
 

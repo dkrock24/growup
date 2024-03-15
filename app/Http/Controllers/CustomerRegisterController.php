@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Helpers\MailsHelper;
 use App\Models\User;
 use App\Http\Requests\StoreCatalogRequest;
 use App\Http\Requests\UpdateCatalogRequest;
@@ -10,9 +11,11 @@ use Illuminate\Support\Facades\Hash;
 
 class CustomerRegisterController extends Controller
 {
-    public function __construct()
+    private $mail;
+    public function __construct(MailsHelper $mail)
     {
         //$this->middleware('auth');
+        $this->mail = $mail;
     }
 
     public function index()
@@ -35,16 +38,19 @@ class CustomerRegisterController extends Controller
      */
     public function create(request $request)
     {
-        $user =  User::create([
-            'name' => $request['name'],
-            'last_name' => $request['last_name'],
-            'agreed' => $request['agreed'] ? true : false,
-            'email' => $request['email'],
-            'password' => hash::make($request['password']),
-            'role_id' => 2
-        ]);
+        $user = new User();
+        $user->name = $request['name'];
+        $user->last_name = $request['last_name'];
+        $user->agreed = $request['agreed'] ? true : false;
+        $user->email = $request['email'];
+        $user->password = hash::make($request['password']);
+        $user->role_id = 2;
+        $user->save();
 
         if ($user) {
+            
+            $this->mail->newCustomer($user);
+
             return redirect('/services')->with('message', 'You are in now!');
         } else {
             return redirect('/register')->with('message', 'Something went wrong!');

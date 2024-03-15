@@ -137,7 +137,7 @@ body {
   color: #222;
   font-weight: 400;
   font-family: 'Montserrat';
-  background-image: url("../images/signup-bg.jpg");
+  background-image: url("../images/deep_clean_2.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
   -moz-background-size: cover;
@@ -193,6 +193,7 @@ body {
   -webkit-border-radius: 10px;
   -o-border-radius: 10px;
   -ms-border-radius: 10px;
+  opacity: 90%;
   padding: 50px 85px; }
 
 .form-group {

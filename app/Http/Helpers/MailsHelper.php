@@ -2,6 +2,7 @@
 
 namespace App\Http\Helpers;
 use App\Mail\SampleMail;
+use App\Models\User;
 use Mail;
 
 class MailsHelper
@@ -20,6 +21,19 @@ class MailsHelper
             'url' => \App::make('url')->to('/login')
         ];
 
-        Mail::to($to)->send(new SampleMail($content));
+        Mail::to($to)->send(new SampleMail($content, 'mails.mail'));
+    }
+
+    public function newCustomer(User $user) {
+
+        $content = [
+            'user' => $user->name ." ". $user->last_name,
+            'first_name' => $user->name,
+            'last_name' => $user->last_name,
+            'email' => $user->email,
+            'url' => \App::make('url')->to('/login')
+        ];
+
+        Mail::to($user->email)->send(new SampleMail($content, 'mails.newCustomer'));
     }
 }
